@@ -1,6 +1,6 @@
 experiment: low-dimensional
 model: NCDSSMNL
-dataset: climate
+dataset: hawkes
 data_fold: 0
 exp_root_dir: ./results/{model}/{dataset}/{timestamp}/
 train_batch_size: 100
