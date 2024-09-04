@@ -15,7 +15,7 @@ def get_model(config):
         from .pendulum import build_model
     elif config["dataset"] in {"box", "pong"}:
         from .pymunk import build_model
-    elif config["dataset"] == "climate":
+    elif config["dataset"] == "hawkes":
         from .climate import build_model
     else:
         raise ValueError(f"Unknown dataset {config['dataset']}")
@@ -110,12 +110,13 @@ def get_dataset(config: Dict):
             pred_len=100,
             missing_p=config["train_missing_p"],
         )
-    elif dataset_name == "climate":
-        csv_path = DATA_ROOT / "climate/climate-data-preproc.csv"
+    elif dataset_name == "hawkes":
+        #csv_path = DATA_ROOT / "climate/climate-data-preproc.csv"
+        csv_path = '/content/data/hawkes.csv'
         fold_idx = config["data_fold"]
-        train_idx = np.load(DATA_ROOT / f"climate/fold_idx_{fold_idx}/train_idx.npy")
-        val_idx = np.load(DATA_ROOT / f"climate/fold_idx_{fold_idx}/val_idx.npy")
-        test_idx = np.load(DATA_ROOT / f"climate/fold_idx_{fold_idx}/test_idx.npy")
+        train_idx = np.load(DATA_ROOT / f"hawkes/fold_idx_{fold_idx}/train_idx.npy")
+        val_idx = np.load(DATA_ROOT / f"hawkes/fold_idx_{fold_idx}/val_idx.npy")
+        test_idx = np.load(DATA_ROOT / f"hawkes/fold_idx_{fold_idx}/test_idx.npy")
         train_dataset = ClimateDataset(
             csv_path=csv_path,
             train=True,
