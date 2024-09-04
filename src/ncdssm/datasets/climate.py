@@ -119,7 +119,7 @@ class ClimateDataset(torch.utils.data.Dataset):
             torch.cat(dict_of_samples["past_times"]), sorted=True, return_inverse=True
         )
         comb_past_target = torch.zeros(
-            [batch_size, comb_past_times.shape[0], target_dim]
+            [batch_size, comb_past_times.shape[0], target_dim],dtype=torch.float64
         )
         comb_past_mask = torch.zeros_like(comb_past_target)
         past_offset = 0
@@ -134,7 +134,12 @@ class ClimateDataset(torch.utils.data.Dataset):
                 past_offset : past_offset + time.shape[0]
             ]
             past_offset += time.shape[0]
+            print('comb_past_target',comb_past_target)
+            print('i =',i,'past_indices',past_indices)
+            print('dtype',past_indices.dtype)
             comb_past_target[i, past_indices] = tgt
+            print('i =',i,'past_indices',past_indices)
+            print('dtype',past_indices.dtype)
             comb_past_mask[i, past_indices] = mask
         # Collate future
         comb_future_target = None
