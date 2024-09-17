@@ -10,7 +10,7 @@ lr_decay_steps: 500
 train_missing_p: 0.
 ssm_params_warmup_steps: 0
 max_grad_norm: 100.0
-num_steps: 5000
+num_steps: 100
 log_steps: 500
 save_steps: 500
 device: cpu  # Which device to use, e.g., cpu, cuda:0, cuda:1, ...
